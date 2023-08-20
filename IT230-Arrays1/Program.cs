@@ -10,8 +10,6 @@ namespace IT230_Arrays1
 {
     public class Program
     {
-        private const int MAX_POINTS = 10;
-        
         public static void Main()
         {
             if (File.Exists("inputs.txt") == false)
@@ -47,7 +45,6 @@ namespace IT230_Arrays1
                             instruction = $"Adding {num} to the array";
                             Console.WriteLine(instruction);
                             int sizeBefore = Source.players == null ? 0 : Source.players.Length;
-                            bool zerosInArray = Source.players != null && Array.Exists(Source.players, element => element == 0);
                             
                             startTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                             Source.InsertIntoArray(num);
@@ -57,13 +54,9 @@ namespace IT230_Arrays1
                             {
                                 Console.Error.WriteLine("Error: Expected array to be initialized, but it is null.");
                             }
-                            else if(zerosInArray == false && sizeBefore == Source.players.Length)
+                            else if(sizeBefore == Source.players.Length)
                             {
                                 Console.Error.WriteLine("Error: Expected array size to increase, but it did not.");
-                            }
-                            else if(zerosInArray == true && sizeBefore != Source.players.Length)
-                            {
-                                Console.Error.WriteLine("Error: Expected array size to stay the same, but it increased.");
                             }
                             else
                             {
@@ -71,7 +64,7 @@ namespace IT230_Arrays1
                             }
                             break;
                         case "s":
-                            instruction = $"Searching for {num} in the array";
+                            instruction = $"Checking array length is correct. Expect {num}.";
                             Console.WriteLine(instruction);
                             if (Source.players!.Length != num)
                             {
@@ -127,9 +120,7 @@ namespace IT230_Arrays1
                                 break;
                             }
 
-                            int[] howArrayShouldLook = arrBefore
-                                .Select(x => x == num ? 0 : x)
-                                .OrderBy(x => x == 0).ToArray();
+                            int[] howArrayShouldLook = arrBefore.Where(x => x != num).ToArray();
                                 
                             if (howArrayShouldLook.SequenceEqual(Source.players!) == false)
                             {
@@ -154,7 +145,7 @@ namespace IT230_Arrays1
             
             Console.WriteLine("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
             loopEnd:
-            Console.WriteLine($"Correctness score: {Math.Round(pointsEarned * 1.0f/pointsMax * MAX_POINTS, 2)}/{MAX_POINTS} points.");
+            Console.WriteLine($"Correctness score: {Math.Round(pointsEarned * 1.0f/pointsMax, 2) * 100}%.");
             Console.WriteLine($"Time used: {totalTimeUsed}ms");
             Console.WriteLine("(Optimization points will be calculated separately.)");
         }
