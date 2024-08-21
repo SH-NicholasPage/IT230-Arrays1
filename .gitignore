@@ -5,6 +5,7 @@
 *.suo
 *.user
 *.sln.docstates
+.vs
 
 # Build results
 
@@ -170,3 +171,4 @@ _NCrunch*
 *.app
 
 cmake-build-debug/
+.idea
