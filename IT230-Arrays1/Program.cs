@@ -64,7 +64,7 @@ namespace IT230_Arrays1
                             }
                             break;
                         case "s":
-                            instruction = $"Checking array length is correct. Expect {num}.";
+                            instruction = $"Checking array length is correct. Expecting {num}";
                             Console.WriteLine(instruction);
                             if (Source.players!.Length != num)
                             {
@@ -79,7 +79,7 @@ namespace IT230_Arrays1
                             instruction = $"Checking if {num} exists in the array";
                             Console.WriteLine(instruction);
                             startTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                            bool found1 = Source.SearchInArray(num);
+                            bool found1 = Source.SearchArray(num);
                             totalTimeUsed += DateTimeOffset.Now.ToUnixTimeMilliseconds() - startTime;
                             if (found1 == false)
                             {
@@ -94,7 +94,7 @@ namespace IT230_Arrays1
                             instruction = $"Checking if {num} does not exist in the array";
                             Console.WriteLine(instruction);
                             startTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                            bool found2 = Source.SearchInArray(num);
+                            bool found2 = Source.SearchArray(num);
                             totalTimeUsed += DateTimeOffset.Now.ToUnixTimeMilliseconds() - startTime;
                             if (found2 == true)
                             {
@@ -140,11 +140,10 @@ namespace IT230_Arrays1
             catch (Exception e)
             {
                 Console.Error.WriteLine("\nCaught Exception: " + e.Message);
-                Console.Error.WriteLine($"Exception happened when {instruction.ToLower()}.");
+                Console.Error.WriteLine($"Instruction causing the exception: {instruction}.");
             }
             
             Console.WriteLine("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
-            loopEnd:
             Console.WriteLine($"Correctness score: {Math.Round(pointsEarned * 1.0f/pointsMax, 2) * 100}%.");
             Console.WriteLine($"Time used: {totalTimeUsed}ms");
             Console.WriteLine("(Optimization points will be calculated separately.)");
