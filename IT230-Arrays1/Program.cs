@@ -29,7 +29,7 @@ namespace IT230_Arrays1
                 {
                     String op = l.Split()[0];
 
-                    if (op.StartsWith("#") || op == String.Empty)
+                    if (op.StartsWith('#') || op == String.Empty)
                     {
                         continue;
                     }
@@ -79,9 +79,9 @@ namespace IT230_Arrays1
                             instruction = $"Checking if {num} exists in the array";
                             Console.WriteLine(instruction);
                             startTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                            bool found1 = Source.SearchArray(num);
+                            int found1 = Source.SearchArray(num);
                             totalTimeUsed += DateTimeOffset.Now.ToUnixTimeMilliseconds() - startTime;
-                            if (found1 == false)
+                            if (found1 <= -1)
                             {
                                 Console.Error.WriteLine($"Error: Expected {num} to exist in the array, but it does not.");
                             }
@@ -94,9 +94,9 @@ namespace IT230_Arrays1
                             instruction = $"Checking if {num} does not exist in the array";
                             Console.WriteLine(instruction);
                             startTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                            bool found2 = Source.SearchArray(num);
+                            int found2 = Source.SearchArray(num);
                             totalTimeUsed += DateTimeOffset.Now.ToUnixTimeMilliseconds() - startTime;
-                            if (found2 == true)
+                            if (found2 >= 0)
                             {
                                Console.Error.WriteLine($"Error: Expected {num} to not exist in the array, but it does.");
                             }
